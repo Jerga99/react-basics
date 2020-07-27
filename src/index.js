@@ -2,11 +2,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import './index.css';
+
 import * as serviceWorker from './serviceWorker';
+
+// const h1Element = React.createElement('h1', null, 'Hello World');
 
 ReactDOM.render(
   <React.StrictMode>
-    <h1>Hello World</h1>
+    <div className="container">
+      <h1>Hello World</h1>
+    </div>
+    {/* { React.createElement('div', { className: 'container' }, h1Element) } */}
   </React.StrictMode>,
   document.getElementById('root')
 )
