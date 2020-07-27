@@ -20,11 +20,27 @@ import React from 'react';
 
 class App extends React.Component {
 
+  state = {
+    counter: 0
+  }
+
+  increment = (num) => {
+    this.setState({
+      counter: this.state.counter + num
+    })
+  }
+
+  // function declaration -> function hello(){}
+  // function expression -> const hello = () => {}
+
   render() {
     return (
       <div className="container">
-        <h1>Hello World from Class Component</h1>
-        <h2>Hey Guys!</h2>
+        <h1>Counter Application: {this.state.counter}</h1>
+        {/* provide here function expression which will be executed when clicking
+        on button */}
+        <button onClick={() => this.increment(1)}>Increment</button>
+        <button onClick={() => this.increment(-1)}>Decrement</button>
       </div>
     )
   }
