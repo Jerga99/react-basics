@@ -31,11 +31,19 @@ class App extends React.Component {
     counter: 0
   }
 
-  increment = (num) => {
+  increment = num => () => {
     this.setState({
       counter: this.state.counter + num
     })
   }
+
+  // increment = (num) => {
+  //   return () => {
+  //     this.setState({
+  //       counter: this.state.counter + num
+  //     })
+  //   }
+  // }
 
   // function declaration -> function hello(){}
   // function expression -> const hello = () => {}
@@ -46,8 +54,8 @@ class App extends React.Component {
         <h1>Counter Application: {this.state.counter}</h1>
         {/* provide here function expression which will be executed when clicking
         on button */}
-        <button onClick={() => this.increment(1)}>Increment</button>
-        <button onClick={() => this.increment(-1)}>Decrement</button>
+        <button onClick={this.increment(1)}>Increment</button>
+        <button onClick={this.increment(-1)}>Decrement</button>
       </div>
     )
   }
