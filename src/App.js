@@ -1,6 +1,6 @@
 
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AppView from './AppView';
 
 // function App() {
@@ -14,6 +14,16 @@ import AppView from './AppView';
 
 const App = (props) => {
   const [counter, setCounter] = useState(0);
+
+  // Executed initialy and every time component will update
+  useEffect(() => {
+    console.log('calling useEffect!');
+    setCounter(100);
+  }, [])
+
+  useEffect(() => {
+    console.log('calling my other useEffect!');
+  }, [counter])
 
   const increment = num => () => {
     setCounter(counter + num);
@@ -38,16 +48,23 @@ const App = (props) => {
 
 // class App extends React.Component {
 
-//   // constructor() {
-//   //   super();
-//   //   this.state = {
-//   //     counter: 0
-//   //   }
-//   // }
-
-//   state = {
-//     counter: 0
+//   constructor() {
+//     super();
+//     console.log('calling constructor')
+//     this.state = {
+//       counter: 0
+//     }
 //   }
+
+//   // Called only once after render
+//   componentDidMount() {
+//     this.setState({counter: 100});
+//     console.log('calling componentDidMount')
+//   }
+
+//   // state = {
+//   //   counter: 0
+//   // }
 
 //   increment = num => () => {
 //     this.setState({
@@ -66,7 +83,9 @@ const App = (props) => {
 //   // function declaration -> function hello(){}
 //   // function expression -> const hello = () => {}
 
+//   // Lifecycle function, it's called after constructor and every time your componen is updated
 //   render() {
+//     console.log('calling render')
 //     const { title, magicalNum } = this.props;
 //     const { counter } = this.state;
 //     return (
