@@ -1,7 +1,7 @@
 
 
 import React, { useState } from 'react';
-
+import AppView from './AppView';
 
 // function App() {
 //   return (
@@ -12,19 +12,24 @@ import React, { useState } from 'react';
 //   )
 // }
 
-const App = () => {
-  const [counter, setCounter] = useState(0); // return arrays with 2 values, 1. state 2. function to mutate the state
-  const [title, setTitle] = useState("My Counter Application");
+const App = (props) => {
+  const [counter, setCounter] = useState(0);
 
   const increment = num => () => {
     setCounter(counter + num);
   }
 
+  const testFunction = () => {
+    alert('executinf function!');
+  }
+
   return (
     <div className="container">
-      <h1>{title}: {counter}</h1>
-      {/* provide here function expression which will be executed when clicking
-      on button */}
+      <AppView
+        {...props}
+        testFunction={testFunction}
+        counter={counter}
+      />
       <button onClick={increment(1)}>Increment</button>
       <button onClick={increment(-1)}>Decrement</button>
     </div>
@@ -62,13 +67,16 @@ const App = () => {
 //   // function expression -> const hello = () => {}
 
 //   render() {
+//     const { title, magicalNum } = this.props;
+//     const { counter } = this.state;
 //     return (
 //       <div className="container">
-        // <h1>Counter Application: {this.state.counter}</h1>
-        // {/* provide here function expression which will be executed when clicking
-        // on button */}
-        // <button onClick={this.increment(1)}>Increment</button>
-        // <button onClick={this.increment(-1)}>Decrement</button>
+//         <h1>{title}: {counter}</h1>
+//         <p>{magicalNum}</p>
+//         {/* provide here function expression which will be executed when clicking
+//         on button */}
+//         <button onClick={this.increment(1)}>Increment</button>
+//         <button onClick={this.increment(-1)}>Decrement</button>
 //       </div>
 //     )
 //   }

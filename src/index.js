@@ -7,9 +7,12 @@ import './index.css';
 
 import * as serviceWorker from './serviceWorker';
 
+const appTitle = 'My Perfect App!';
+const appNumber = 10;
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App title={appTitle} magicalNum={appNumber} />
   </React.StrictMode>,
   document.getElementById('root')
 )
