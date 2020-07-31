@@ -4,8 +4,6 @@ import React from 'react';
 const ResourceDetail = ({onButtonClick}) => {
 
   return (
-    <>
-      <h4 className="mb-3">Update Resource</h4>
       <div className="card">
         <div className="card-header">
           Resource Name
@@ -15,12 +13,8 @@ const ResourceDetail = ({onButtonClick}) => {
             <p>Resource description...</p>
             <footer className="text-muted mb-2">Type</footer>
           </blockquote>
-          <button
-            onClick={onButtonClick}
-            className="btn btn-primary">Edit</button>
         </div>
       </div>
-    </>
   )
 }
 
