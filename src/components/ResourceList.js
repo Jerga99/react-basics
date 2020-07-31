@@ -1,38 +1,9 @@
 
-import React, { useState } from 'react';
-
-const initialResources = [
-  {
-    _id: '1',
-    title: 'Resource 1',
-    description: 'Description 1',
-    link: 'https://google.com',
-    type: 'blog'
-  },
-  {
-    _id: '2',
-    title: 'Resource 2',
-    description: 'Description 2',
-    link: 'https://google.com',
-    type: 'video'
-  },
-  {
-    _id: '3',
-    title: 'Resource 3',
-    description: 'Description 3',
-    link: 'https://google.com',
-    type: 'book'
-  }
-]
-
-// 1. create state with initialResources
-// 2. Iterate resources
-// 3. display resouce info
 
 
-const ResourceList = () => {
-  const [resources, setResources] = useState(initialResources);
+import React from 'react';
 
+const ResourceList = ({resources}) => {
   return (
     <ul className="list-group mb-3 resource-list">
       { resources.map(resource =>
