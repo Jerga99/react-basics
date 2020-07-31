@@ -32,6 +32,7 @@ const initialResources = [
 
 const ResourceHome = () => {
   const [resources, setResources] = useState(initialResources);
+  const [isDetailView, setDetailView] = useState(true);
 
   const addResource = () => {
     const _id = '_' + Math.random().toString(36).substr(2, 9);
@@ -60,11 +61,10 @@ const ResourceHome = () => {
           <ResourceList resources={resources} />
           <button onClick={addResource} className="btn btn-primary">Add Resource</button>
         </div>
-        {/* <div className="col-md-8 order-md-1">
-          <ResourceUpdate />
-        </div> */}
         <div className="col-md-8 order-md-1">
-          <ResourceDetail />
+          { isDetailView ?
+            <ResourceDetail onButtonClick={() => setDetailView(false)} /> :
+            <ResourceUpdate /> }
         </div>
       </div>
     </div>

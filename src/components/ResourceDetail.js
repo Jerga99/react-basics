@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-const ResourceDetail = () => {
+const ResourceDetail = ({onButtonClick}) => {
 
   return (
     <>
@@ -15,7 +15,9 @@ const ResourceDetail = () => {
             <p>Resource description...</p>
             <footer className="text-muted mb-2">Type</footer>
           </blockquote>
-          <a href="#" className="btn btn-primary">Edit</a>
+          <button
+            onClick={onButtonClick}
+            className="btn btn-primary">Edit</button>
         </div>
       </div>
     </>
