@@ -3,6 +3,16 @@ import React from 'react';
 
 const ResourceDetail = ({resource}) => {
 
+  if (!resource?._id) {
+    return (
+      <div className="card">
+        <div className="card-body">
+          No resource selected :(
+        </div>
+      </div>
+    )
+  }
+
   return (
       <div className="card">
         <div className="card-header">

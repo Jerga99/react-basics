@@ -62,12 +62,13 @@ const ResourceHome = () => {
           </h4>
           <ResourceSearch />
           <ResourceList
+            activeId={activeResource?._id}
             onItemClick={setSetlectedResource}
             resources={resources} />
           <button onClick={addResource} className="btn btn-primary">Add Resource</button>
         </div>
         <div className="col-md-8 order-md-1">
-          <h4 className="mb-3">Resource {activeResource._id}
+          <h4 className="mb-3">Resource {activeResource?._id}
             <button
               onClick={() => setDetailView(!isDetailView)}
               className={`btn btn-sm ml-2 ${isDetailView ? 'btn-warning' : 'btn-primary'}`}>
