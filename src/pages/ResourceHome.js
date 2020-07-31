@@ -31,7 +31,7 @@ const initialResources = [
 ]
 
 const ResourceHome = () => {
-  const [selectedResource, setSetlectedResource] = useState({});
+  const [selectedResource, setSetlectedResource] = useState();
   const [resources, setResources] = useState(initialResources);
   const [isDetailView, setDetailView] = useState(true);
 
@@ -48,6 +48,8 @@ const ResourceHome = () => {
     setResources([newSource, ...resources]);
   }
 
+  const hasResources = resources && resources.length > 0;
+  const activeResource = selectedResource || (hasResources && resources[0]) || null;
 
   return (
     <div className="container">
@@ -65,7 +67,7 @@ const ResourceHome = () => {
           <button onClick={addResource} className="btn btn-primary">Add Resource</button>
         </div>
         <div className="col-md-8 order-md-1">
-          <h4 className="mb-3">Resource {selectedResource._id}
+          <h4 className="mb-3">Resource {activeResource._id}
             <button
               onClick={() => setDetailView(!isDetailView)}
               className={`btn btn-sm ml-2 ${isDetailView ? 'btn-warning' : 'btn-primary'}`}>
@@ -73,7 +75,7 @@ const ResourceHome = () => {
             </button>
           </h4>
           { isDetailView ?
-            <ResourceDetail onButtonClick={() => setDetailView(false)} /> :
+            <ResourceDetail resource={{...activeResource}} /> :
             <ResourceUpdate /> }
         </div>
       </div>
