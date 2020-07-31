@@ -31,6 +31,7 @@ const initialResources = [
 ]
 
 const ResourceHome = () => {
+  const [selectedResource, setSetlectedResource] = useState({});
   const [resources, setResources] = useState(initialResources);
   const [isDetailView, setDetailView] = useState(true);
 
@@ -58,11 +59,13 @@ const ResourceHome = () => {
             <span className="badge badge-secondary badge-pill">6</span>
           </h4>
           <ResourceSearch />
-          <ResourceList resources={resources} />
+          <ResourceList
+            onItemClick={setSetlectedResource}
+            resources={resources} />
           <button onClick={addResource} className="btn btn-primary">Add Resource</button>
         </div>
         <div className="col-md-8 order-md-1">
-          <h4 className="mb-3">Resource
+          <h4 className="mb-3">Resource {selectedResource._id}
             <button
               onClick={() => setDetailView(!isDetailView)}
               className={`btn btn-sm ml-2 ${isDetailView ? 'btn-warning' : 'btn-primary'}`}>
