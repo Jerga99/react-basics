@@ -35,6 +35,11 @@ const ResourceHome = () => {
     setResources([newSource, ...resources]);
   }
 
+  const handleResourceUpdate = updatedResource => {
+    // TOOD: Update resource list!
+    alert(JSON.stringify(updatedResource));
+  }
+
   const hasResources = resources && resources.length > 0;
   const activeResource = selectedResource || (hasResources && resources[0]) || null;
 
@@ -64,7 +69,10 @@ const ResourceHome = () => {
           </h4>
           { isDetailView ?
             <ResourceDetail resource={activeResource} /> :
-            <ResourceUpdate resource={activeResource} /> }
+            <ResourceUpdate
+              resource={activeResource}
+              onResourceUpdate={handleResourceUpdate}
+            /> }
         </div>
       </div>
     </div>
