@@ -1,10 +1,14 @@
 
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 const RESOURCE_TYPES = ['blog', 'video', 'book'];
 
 const ResourceForm = ({resource, onSubmit}) => {
   const [uResource, setUResource] = useState(resource);
+
+  useEffect(() => {
+    setUResource(resource);
+  }, [resource])
 
   const handleChange = (e) => {
     const { name, value } = e.target;
