@@ -26,15 +26,21 @@ const ResourceHome = () => {
     return resources.findIndex(r => r._id === resource._id);
   }
 
-  const updateResourceList = resource => {
+  const mutateResourceList = (resource, task) => {
     const resourceIndex = findResourceIndex(resource);
     const copy = [...resources];
-    copy[resourceIndex] = resource;
+
+    if (task === 'update') {
+      copy[resourceIndex] = resource;
+    } else {
+      copy.splice(resourceIndex, 1);
+    }
+
     return copy;
   }
 
   const handleResourceUpdate = updatedResource => {
-    const updatedResources = updateResourceList(updatedResource);
+    const updatedResources = mutateResourceList(updatedResource, 'update');
 
     setResources(updatedResources);
     setSetlectedResource(updatedResource);
@@ -45,7 +51,14 @@ const ResourceHome = () => {
 
     if (isConfirm) {
       const deletedResource = await deleteResourceApi(activeResource?._id);
-      window.alert(`${deletedResource._id} has been deleted!`)
+      const updatedResources = mutateResourceList(deletedResource, 'delete');
+
+      setResources(updatedResources);
+      setSetlectedResource(updatedResources[0] || null);
+
+      if (updatedResources.length === 0 && !isDetailView) {
+        setDetailView(true);
+      }
     }
   }
 
