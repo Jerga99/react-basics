@@ -11,7 +11,7 @@ export function getResources() {
 
 export function updateResourceApi(resourceId, resourceData) {
   return axios
-    .patch(`http://localhost:3000/api/resources/${resourceId}`, resourceData)
+    .patch(`http://localhost:3000/api/resources/${resourceId}asdashjda`, resourceData)
     .then(res => res.data)
     .catch(err => Promise.reject(err?.response?.data))
 }

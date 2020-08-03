@@ -21,8 +21,12 @@ const ResourceForm = ({resource, onSubmit, alert}) => {
 
   return (
     <>
-      {alert?.success}
-      {alert?.error}
+      { alert?.success &&
+        <div className="alert alert-success">{alert.success}</div>
+      }
+      { alert?.error &&
+        <div className="alert alert-danger">{alert.error}</div>
+      }
       <form>
         <div className="mb-3">
           <label htmlFor="title">Title</label>

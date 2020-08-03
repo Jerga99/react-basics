@@ -8,17 +8,19 @@ const createAlert = () => ({success: null, error: null})
 const ResourceUpdate = ({resource, onResourceUpdate}) => {
   const [alert, setAlert] = useState(createAlert());
 
-  const updateResource = async (resourceData) => {
+  const displayAlert = (type, message) => {
     const _alert = createAlert();
+    _alert[type] = message;
+    setAlert(_alert);
+  }
+
+  const updateResource = async (resourceData) => {
     try {
       const updatedResource = await updateResourceApi(resourceData._id, resourceData);
       onResourceUpdate(updatedResource);
-      // set success alert
-      _alert.success = 'Resource was updated!';
-      setAlert(_alert);
+      displayAlert('success', 'Resouce was updated!');
     } catch(e) {
-      _alert.error = e;
-      setAlert(_alert);
+      displayAlert('error', e);
     }
   }
 
