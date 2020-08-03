@@ -6,7 +6,7 @@ import ResourceDetail from '../components/ResourceDetail';
 import ResourceUpdate from '../components/ResourceUpdate';
 import Header from '../components/Header';
 
-import { getResources } from '../actions';
+import { getResources, deleteResourceApi } from '../actions';
 
 const ResourceHome = () => {
   const [selectedResource, setSetlectedResource] = useState();
@@ -40,6 +40,15 @@ const ResourceHome = () => {
     setSetlectedResource(updatedResource);
   }
 
+  const deleteResource = async () => {
+    const isConfirm = window.confirm('Are you sure you want to delete this resouce ?');
+
+    if (isConfirm) {
+      const deletedResource = await deleteResourceApi(activeResource?._id);
+      window.alert(`${deletedResource._id} has been deleted!`)
+    }
+  }
+
   const hasResources = resources && resources.length > 0;
   const activeResource = selectedResource || (hasResources && resources[0]) || null;
 
@@ -62,8 +71,13 @@ const ResourceHome = () => {
           <h4 className="mb-3">Resource {activeResource?._id}
             <button
               onClick={() => setDetailView(!isDetailView)}
-              className={`btn btn-sm ml-2 ${isDetailView ? 'btn-warning' : 'btn-primary'}`}>
+              className={`btn btn-sm ml-2 mr-2 ${isDetailView ? 'btn-warning' : 'btn-primary'}`}>
               { isDetailView ? 'Edit' : 'Detail'}
+            </button>
+            <button
+              onClick={deleteResource}
+              className="btn btn-danger btn-sm">
+              Delete
             </button>
           </h4>
           { isDetailView ?
