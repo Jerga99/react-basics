@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 // HOC is function that takes a Component and returns new component
 // Newly returned component renders original component and provides to it additional
@@ -10,17 +10,35 @@ import React from 'react';
 
 //   }
 // }
-
+const initAlert = () => ({success: null, error: null})
 
 const withAlert = Component => props => {
+  const [alert, setAlert] = useState(initAlert());
+  const setTimeoutId = useRef(null);
+  const resourceId = props?.resource?._id;
 
-  const myCustomProp = 10;
-  const myCustomFunction = () => window.alert('Hello World')
+  const resetAlert = () => setAlert(initAlert());
+  const resetTimeout = () => setTimeoutId?.current && clearTimeout(setTimeoutId.current);
+
+  useEffect(() => {
+    resetAlert();
+    resetTimeout();
+    return () => resetTimeout()
+  }, [resourceId])
+
+  const displayAlert = (type, message) => {
+    const _alert = initAlert();
+    _alert[type] = message;
+    setAlert(_alert);
+    setTimeoutId.current = setTimeout(() => {
+      resetAlert();
+    }, 3000);
+  }
 
   return (
     <Component
-      myCustomProp={myCustomProp}
-      myCustomFunction={myCustomFunction}
+      alert={alert}
+      displayAlert={displayAlert}
       {...props}
     />
   )
