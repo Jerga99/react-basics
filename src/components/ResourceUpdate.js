@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import ResourceForm from './ResourceForm';
 import { updateResourceApi } from '../actions';
 
@@ -7,19 +7,20 @@ const initAlert = () => ({success: null, error: null})
 
 const ResourceUpdate = ({resource, onResourceUpdate}) => {
   const [alert, setAlert] = useState(initAlert());
+  const setTimeoutId = useRef(null);
 
   const resetAlert = () => setAlert(initAlert());
 
   useEffect(() => {
     resetAlert();
+    setTimeoutId?.current && clearTimeout(setTimeoutId.current);
   }, [resource]);
 
   const displayAlert = (type, message) => {
     const _alert = initAlert();
     _alert[type] = message;
     setAlert(_alert);
-    setTimeout(() => {
-      window.alert('Hello World');
+    setTimeoutId.current = setTimeout(() => {
       resetAlert();
     }, 3000);
   }
