@@ -9,12 +9,15 @@ const ResourceUpdate = ({resource, onResourceUpdate}) => {
   const [alert, setAlert] = useState(initAlert());
   const setTimeoutId = useRef(null);
 
+  const resourceId = resource?._id;
   const resetAlert = () => setAlert(initAlert());
+  const resetTimeout = () => setTimeoutId?.current && clearTimeout(setTimeoutId.current);
 
   useEffect(() => {
     resetAlert();
-    setTimeoutId?.current && clearTimeout(setTimeoutId.current);
-  }, [resource]);
+    resetTimeout();
+    return () => resetTimeout()
+  }, [resourceId]);
 
   const displayAlert = (type, message) => {
     const _alert = initAlert();
