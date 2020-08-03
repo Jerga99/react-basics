@@ -39,10 +39,14 @@ const ResourceHome = () => {
     return copy;
   }
 
-  const handleResourceUpdate = updatedResource => {
-    const updatedResources = mutateResourceList(updatedResource, 'update');
-
+  const hydrateResources = (updatedResource, task) => {
+    const updatedResources = mutateResourceList(updatedResource, task);
     setResources(updatedResources);
+    return updatedResources;
+  }
+
+  const handleResourceUpdate = updatedResource => {
+    hydrateResources(updatedResource, 'update')
     setSetlectedResource(updatedResource);
   }
 
@@ -51,9 +55,7 @@ const ResourceHome = () => {
 
     if (isConfirm) {
       const deletedResource = await deleteResourceApi(activeResource?._id);
-      const updatedResources = mutateResourceList(deletedResource, 'delete');
-
-      setResources(updatedResources);
+      const updatedResources = hydrateResources(deletedResource, 'delete');
       setSetlectedResource(updatedResources[0] || null);
 
       if (updatedResources.length === 0 && !isDetailView) {
@@ -82,16 +84,20 @@ const ResourceHome = () => {
         </div>
         <div className="col-md-8 order-md-1">
           <h4 className="mb-3">Resource {activeResource?._id}
-            <button
-              onClick={() => setDetailView(!isDetailView)}
-              className={`btn btn-sm ml-2 mr-2 ${isDetailView ? 'btn-warning' : 'btn-primary'}`}>
-              { isDetailView ? 'Edit' : 'Detail'}
-            </button>
-            <button
-              onClick={deleteResource}
-              className="btn btn-danger btn-sm">
-              Delete
-            </button>
+            { hasResources &&
+              <>
+                <button
+                  onClick={() => setDetailView(!isDetailView)}
+                  className={`btn btn-sm ml-2 mr-2 ${isDetailView ? 'btn-warning' : 'btn-primary'}`}>
+                  { isDetailView ? 'Edit' : 'Detail'}
+                </button>
+                <button
+                  onClick={deleteResource}
+                  className="btn btn-danger btn-sm">
+                  Delete
+                </button>
+              </>
+            }
           </h4>
           { isDetailView ?
             <ResourceDetail resource={activeResource} /> :

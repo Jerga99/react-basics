@@ -2,12 +2,18 @@
 
 import React, { useState, useEffect } from 'react';
 const RESOURCE_TYPES = ['blog', 'video', 'book'];
+const BASE_RESOURCE = {
+  title: '',
+  description: '',
+  type: '',
+  link: ''
+}
 
 const ResourceForm = ({resource, onSubmit, alert}) => {
-  const [uResource, setUResource] = useState(resource);
+  const [uResource, setUResource] = useState(resource || BASE_RESOURCE);
 
   useEffect(() => {
-    setUResource(resource);
+    resource?._id && setUResource(resource);
   }, [resource])
 
   const handleChange = (e) => {
