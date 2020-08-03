@@ -1,11 +1,12 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import ResourceForm from './ResourceForm';
+import withAlert from '../hoc/withAlert';
 import { updateResourceApi } from '../actions';
 
 const initAlert = () => ({success: null, error: null})
 
-const ResourceUpdate = ({resource, onResourceUpdate}) => {
+const ResourceUpdate = ({resource, onResourceUpdate, myCustomProp, myCustomFunction}) => {
   const [alert, setAlert] = useState(initAlert());
   const setTimeoutId = useRef(null);
 
@@ -46,4 +47,5 @@ const ResourceUpdate = ({resource, onResourceUpdate}) => {
   )
 }
 
-export default ResourceUpdate;
+export default withAlert(ResourceUpdate);
+
