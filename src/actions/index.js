@@ -18,18 +18,24 @@ function getResourceById(resourceId) {
 export function useGetResource(id) {
   const [resource, setResource] = useState();
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     const _getResource = async () => {
-      const _resources = await getResourceById(id);
-      setResource(_resources);
-      setLoading(false);
+      try {
+        const _resources = await getResourceById(id);
+        setResource(_resources);
+        setLoading(false);
+      } catch (e) {
+        setError(true);
+        setLoading(false);
+      }
     }
 
     _getResource();
   }, [id])
 
-  return { resource, loading };
+  return { resource, loading, error };
 }
 
 export function useGetResources() {

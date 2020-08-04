@@ -6,10 +6,14 @@ import { useGetResource } from '../actions';
 
 const ResourceDetail = () => {
   const { id } = useParams();
-  const { resource, loading } = useGetResource(id);
+  const { resource, loading, error } = useGetResource(id);
 
   if (loading) {
     return 'Resource is getting loaded!';
+  }
+
+  if (error) {
+    return 'Resource cannot be loaded';
   }
 
   return (
