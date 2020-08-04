@@ -21,3 +21,10 @@ export function deleteResourceApi(resourceId) {
     .delete(`/api/resources/${resourceId}`)
       .then(res => res.data)
 }
+
+export function createResourceApi(resource) {
+  return axios
+    .post(`/api/resources`, resource)
+    .then(res => res.data)
+    .catch(err => Promise.reject(err?.response?.data))
+}

@@ -23,11 +23,11 @@ const App = () => {
           <Route path="/" exact>
             <ResourceHome />
           </Route>
-          <Route path="/resources/:id">
-            <ResourceDetail />
-          </Route>
           <Route path="/resources/new">
             <ResourceNew />
+          </Route>
+          <Route path="/resources/:id">
+            <ResourceDetail />
           </Route>
           <Route path="/about">
             <About />
