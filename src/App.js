@@ -2,6 +2,8 @@
 
 import React from 'react';
 import ResourceHome from './pages/ResourceHome';
+import ResourceNew from './pages/ResourceNew';
+import About from './pages/About';
 import Header from './components/Header';
 
 import {
@@ -21,10 +23,10 @@ const App = () => {
             <ResourceHome />
           </Route>
           <Route path="/new">
-            <h1>Resource new page</h1>
+            <ResourceNew />
           </Route>
-          <Route path="/detail">
-            <h1>Resource detail page</h1>
+          <Route path="/about">
+            <About />
           </Route>
         </Switch>
       </Router>
