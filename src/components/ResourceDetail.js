@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const ResourceDetail = ({resource}) => {
 
@@ -23,6 +24,10 @@ const ResourceDetail = ({resource}) => {
             <p>{resource.description}</p>
             <footer className="text-muted mb-2">{resource.type}</footer>
           </blockquote>
+          <Link
+            to={`/resources/${resource._id}`}
+            className="btn btn-primary">See the resource
+          </Link>
         </div>
       </div>
   )

@@ -3,6 +3,7 @@
 import React from 'react';
 import ResourceHome from './pages/ResourceHome';
 import ResourceNew from './pages/ResourceNew';
+import ResourceDetail from './pages/ResourceDetail';
 import About from './pages/About';
 import Header from './components/Header';
 
@@ -22,7 +23,10 @@ const App = () => {
           <Route path="/" exact>
             <ResourceHome />
           </Route>
-          <Route path="/new">
+          <Route path="/resources/:id">
+            <ResourceDetail />
+          </Route>
+          <Route path="/resources/new">
             <ResourceNew />
           </Route>
           <Route path="/about">
