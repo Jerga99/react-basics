@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import ResourceSearch from '../components/ResourceSearch';
 import ResourceList from '../components/ResourceList';
 import ResourceDetail from '../components/ResourceDetail';
@@ -54,10 +54,6 @@ const ResourceHome = () => {
     }
   }
 
-  if (loading) {
-    return 'Loading resources!';
-  }
-
   const hasResources = resources && resources.length > 0;
   const activeResource = selectedResource || (hasResources && resources[0]) || null;
 
@@ -69,10 +65,12 @@ const ResourceHome = () => {
           <span className="badge badge-secondary badge-pill">{resources.length}</span>
         </h4>
         <ResourceSearch />
-        <ResourceList
-          activeId={activeResource?._id}
-          onItemClick={setSetlectedResource}
-          resources={resources} />
+        { loading ? 'Loading Resources' :
+          <ResourceList
+            activeId={activeResource?._id}
+            onItemClick={setSetlectedResource}
+            resources={resources} />
+        }
       </div>
       <div className="col-md-8 order-md-1">
         <h4 className="mb-3">Resource {activeResource?._id}

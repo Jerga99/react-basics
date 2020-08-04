@@ -1,7 +1,7 @@
 
 
 import axios from 'axios';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 function getResources() {
   return axios
@@ -13,14 +13,16 @@ export function useGetResources() {
   const [resources, setResources] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const _getResources = async () => {
-    !loading && setLoading(true);
+
+  const _getResources = useCallback(async () => {
     const _resources = await getResources();
     setResources(_resources);
     setLoading(false);
-  }
+  }, [])
 
-  useEffect(() => {_getResources()}, []);
+  useEffect(() => {
+    _getResources();
+  }, [_getResources]);
 
   return { resources, setResources, loading }
 }
