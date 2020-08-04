@@ -9,6 +9,29 @@ function getResources() {
     .then(res => res.data)
 }
 
+function getResourceById(resourceId) {
+  return axios
+    .get(`/api/resources/${resourceId}`)
+    .then(res => res.data)
+}
+
+export function useGetResource(id) {
+  const [resource, setResource] = useState();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const _getResource = async () => {
+      const _resources = await getResourceById(id);
+      setResource(_resources);
+      setLoading(false);
+    }
+
+    _getResource();
+  }, [id])
+
+  return { resource, loading };
+}
+
 export function useGetResources() {
   const [resources, setResources] = useState([]);
   const [loading, setLoading] = useState(true);

@@ -2,12 +2,31 @@
 
 import React from 'react';
 import { useParams } from 'react-router-dom';
+import { useGetResource } from '../actions';
 
 const ResourceDetail = () => {
   const { id } = useParams();
+  const { resource, loading } = useGetResource(id);
+
+  if (loading) {
+    return 'Resource is getting loaded!';
+  }
 
   return (
-    <h1>Resource detail page - {id}</h1>
+    <div className="card">
+      <div className="card-header">
+        {resource.title}
+      </div>
+      <div className="card-body">
+        <blockquote className="blockquote mb-0">
+          <p>{resource.description}</p>
+          <footer className="text-muted mb-2">{resource.type}</footer>
+        </blockquote>
+        <a href={resource.link} target="_blank">
+          See resource link
+        </a>
+      </div>
+    </div>
   )
 }
 
