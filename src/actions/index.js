@@ -1,12 +1,28 @@
 
 
 import axios from 'axios';
+import { useState, useEffect } from 'react';
 
-
-export function getResources() {
+function getResources() {
   return axios
     .get('/api/resources')
     .then(res => res.data)
+}
+
+export function useGetResources() {
+  const [resources, setResources] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const _getResources = async () => {
+    !loading && setLoading(true);
+    const _resources = await getResources();
+    setResources(_resources);
+    setLoading(false);
+  }
+
+  useEffect(() => {_getResources()}, []);
+
+  return { resources, setResources, loading }
 }
 
 export function updateResourceApi(resourceId, resourceData) {

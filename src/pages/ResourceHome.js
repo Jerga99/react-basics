@@ -5,21 +5,12 @@ import ResourceList from '../components/ResourceList';
 import ResourceDetail from '../components/ResourceDetail';
 import ResourceUpdate from '../components/ResourceUpdate';
 
-import { getResources, deleteResourceApi } from '../actions';
+import { useGetResources, deleteResourceApi } from '../actions';
 
 const ResourceHome = () => {
   const [selectedResource, setSetlectedResource] = useState();
-  const [resources, setResources] = useState([]);
+  const {resources, setResources, loading} = useGetResources();
   const [isDetailView, setDetailView] = useState(true);
-
-  useEffect(() => {
-    async function _getResources() {
-      const _resources = await getResources();
-      setResources(_resources);
-    }
-
-    _getResources();
-  }, [])
 
   const findResourceIndex = (resource) => {
     return resources.findIndex(r => r._id === resource._id);
@@ -61,6 +52,10 @@ const ResourceHome = () => {
         setDetailView(true);
       }
     }
+  }
+
+  if (loading) {
+    return 'Loading resources!';
   }
 
   const hasResources = resources && resources.length > 0;
