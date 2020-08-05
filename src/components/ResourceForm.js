@@ -13,7 +13,7 @@ const ResourceForm = ({resource, onSubmit, alert}) => {
   const [uResource, setUResource] = useState(resource || BASE_RESOURCE);
 
   useEffect(() => {
-    resource?._id && setUResource(resource);
+    resource?._id ? setUResource(resource) : setUResource(BASE_RESOURCE);
   }, [resource])
 
   const handleChange = (e) => {
@@ -23,6 +23,10 @@ const ResourceForm = ({resource, onSubmit, alert}) => {
 
   const handleSubmit = () => {
     onSubmit(uResource)
+  }
+
+  if (!resource?._id) {
+    return 'Resource update is not available!'
   }
 
   return (

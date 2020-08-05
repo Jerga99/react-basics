@@ -24,7 +24,10 @@ const ResourceHome = () => {
     }
 
     searchResourcesApi(title)
-      .then(resources => setResources(resources))
+      .then(resources => {
+        resources.length > 0 ? setSetlectedResource(resources[0]) : setSetlectedResource(null)
+        setResources(resources)
+      })
   }
 
   const mutateResourceList = (resource, task) => {
