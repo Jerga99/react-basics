@@ -9,7 +9,7 @@ import { useGetResources, deleteResourceApi, searchResourcesApi } from '../actio
 
 const ResourceHome = () => {
   const [selectedResource, setSetlectedResource] = useState();
-  const {resources, setResources, loading} = useGetResources();
+  const {resources, setResources, refetchResources, loading} = useGetResources();
   const [isDetailView, setDetailView] = useState(true);
 
   const findResourceIndex = (resource) => {
@@ -20,7 +20,7 @@ const ResourceHome = () => {
 
     // TODO: refetch resources!
     if (!title) {
-
+      refetchResources();
     }
 
     searchResourcesApi(title)

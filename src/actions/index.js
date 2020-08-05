@@ -48,18 +48,22 @@ export function useGetResources() {
   const [resources, setResources] = useState([]);
   const [loading, setLoading] = useState(true);
 
-
   const _getResources = useCallback(async () => {
     const _resources = await getResources();
     setResources(_resources);
     setLoading(false);
   }, [])
 
+  const refetchResources = () => {
+    setLoading(true);
+    _getResources();
+  }
+
   useEffect(() => {
     _getResources();
   }, [_getResources]);
 
-  return { resources, setResources, loading }
+  return { resources, setResources, refetchResources, loading }
 }
 
 export function updateResourceApi(resourceId, resourceData) {
