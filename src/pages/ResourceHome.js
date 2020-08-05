@@ -5,7 +5,7 @@ import ResourceList from '../components/ResourceList';
 import ResourceDetail from '../components/ResourceDetail';
 import ResourceUpdate from '../components/ResourceUpdate';
 
-import { useGetResources, deleteResourceApi } from '../actions';
+import { useGetResources, deleteResourceApi, searchResourcesApi } from '../actions';
 
 const ResourceHome = () => {
   const [selectedResource, setSetlectedResource] = useState();
@@ -14,6 +14,17 @@ const ResourceHome = () => {
 
   const findResourceIndex = (resource) => {
     return resources.findIndex(r => r._id === resource._id);
+  }
+
+  const searchResources = (title) => {
+
+    // TODO: refetch resources!
+    if (!title) {
+
+    }
+
+    searchResourcesApi(title)
+      .then(resources => setResources(resources))
   }
 
   const mutateResourceList = (resource, task) => {
@@ -64,7 +75,9 @@ const ResourceHome = () => {
           <span className="text-muted">Your Resources</span>
           <span className="badge badge-secondary badge-pill">{resources.length}</span>
         </h4>
-        <ResourceSearch />
+        <ResourceSearch
+          onSearch={searchResources}
+        />
         { loading ? 'Loading Resources' :
           <ResourceList
             activeId={activeResource?._id}

@@ -9,6 +9,12 @@ function getResources() {
     .then(res => res.data)
 }
 
+export function searchResourcesApi(title) {
+  return axios
+    .get(`/api/resources/s/${title}`)
+    .then(res => res.data)
+}
+
 function getResourceById(resourceId) {
   return axios
     .get(`/api/resources/${resourceId}`)
