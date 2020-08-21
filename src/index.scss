@@ -1,3 +1,25 @@
+
+.resource-app {
+  min-height: 100vh;
+  &.dark {
+    background-color: #272727;
+    color: white;
+
+    label {
+      color: black;
+    }
+  }
+
+  .resource-list.dark {
+    color: black;
+  }
+
+  .card.dark {
+    color: black;
+  }
+}
+
+
 .resource-list {
   max-height: 350px;
   overflow-y: auto;

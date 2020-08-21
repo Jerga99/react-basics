@@ -2,10 +2,12 @@
 
 
 import React from 'react';
+import { useSettings } from '../context/SettingsProvider';
 
 const ResourceList = ({resources, onItemClick, activeId}) => {
+  const { settings } = useSettings();
   return (
-    <ul className="list-group mb-3 resource-list">
+    <ul className={`list-group mb-3 resource-list ${settings?.theme}`}>
       { resources.map(resource =>
         <li
           onClick={() => onItemClick(resource)}

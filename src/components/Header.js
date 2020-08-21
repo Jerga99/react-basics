@@ -3,7 +3,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 const Header = () =>
-  <div className="py-5 text-center">
+  <div className="py-5 text-center app-header">
     <img
       alt="React logo"
       style={{height: '150px'}}

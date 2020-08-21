@@ -1,8 +1,10 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useSettings } from '../context/SettingsProvider';
 
 const ResourceDetail = ({resource}) => {
+  const { settings } = useSettings();
 
   if (!resource?._id) {
     return (
@@ -15,7 +17,7 @@ const ResourceDetail = ({resource}) => {
   }
 
   return (
-      <div className="card">
+      <div className={`card ${settings?.theme}`}>
         <div className="card-header">
           {resource.title}
         </div>
