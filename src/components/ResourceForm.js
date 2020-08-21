@@ -25,10 +25,6 @@ const ResourceForm = ({resource, onSubmit, alert}) => {
     onSubmit(uResource)
   }
 
-  if (!resource?._id) {
-    return 'Resource update is not available!'
-  }
-
   return (
     <>
       { alert?.success &&

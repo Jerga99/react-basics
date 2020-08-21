@@ -20,6 +20,10 @@ const ResourceUpdate = ({
     }
   }
 
+  if (!resource?._id) {
+    return 'Resource update is not available!'
+  }
+
   return (
     <ResourceForm
       alert={alert}
