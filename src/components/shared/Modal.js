@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-const Modal = ({isOpen, onClose}) => {
+const Modal = ({isOpen, onClose, children}) => {
 
   if (isOpen) {
     return (
@@ -10,7 +10,7 @@ const Modal = ({isOpen, onClose}) => {
           <span
             onClick={onClose}
             className="close">&times;</span>
-          <p>Some text in the Modal..</p>
+          <div>{children}</div>
         </div>
       </div>
     )
