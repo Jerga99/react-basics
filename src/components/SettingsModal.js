@@ -1,10 +1,17 @@
 
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Modal from './shared/Modal';
 import SettingsForm from './SettingsForm';
+import { SettingsContext } from '../App' ;
 
 const SettingsModal = () => {
+  const {settings, saveSettings} = useContext(SettingsContext);
   const [isOpen, setIsOpen] = useState(false);
+
+  const handleSave = (settings) => {
+    saveSettings(settings);
+    setIsOpen(false);
+  }
 
   return (
     <>
@@ -15,7 +22,9 @@ const SettingsModal = () => {
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
       >
-        <SettingsForm onSubmit={() => setIsOpen(false)} />
+        <SettingsForm
+          settings={settings}
+          onSubmit={handleSave} />
       </Modal>
     </>
   )

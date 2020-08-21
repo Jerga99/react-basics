@@ -13,14 +13,19 @@ import {
   Route
 } from 'react-router-dom';
 
-export const SettingsContext = React.createContext({theme: 'light', fontSize: '17'});
+const DEFAULT_SETTINGS = {
+  theme: 'light', fontSize: '17'
+}
+
+export const SettingsContext = React.createContext(DEFAULT_SETTINGS);
 
 const App = () => {
   const [settings, setSettings] = useState(getSettings());
 
   function getSettings() {
+    debugger
     const settings = localStorage.getItem('resource-settings');
-    return settings ? JSON.parse(settings) : {};
+    return settings ? JSON.parse(settings) : DEFAULT_SETTINGS;
   }
 
   function saveSettings(settings) {

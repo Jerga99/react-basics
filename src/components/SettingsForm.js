@@ -1,13 +1,13 @@
 
-import React, { useContext } from 'react';
-import { SettingsContext } from '../App' ;
+import React, { useState } from 'react';
 
-const SettingsForm = ({onSubmit}) => {
-  const {settings, saveSettings} = useContext(SettingsContext);
+
+const SettingsForm = ({onSubmit, settings: initialSettings}) => {
+  const [settings, setSettings] = useState(initialSettings);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    saveSettings({...settings, [name]: value})
+    setSettings({...settings, [name]: value})
   }
 
   return (
