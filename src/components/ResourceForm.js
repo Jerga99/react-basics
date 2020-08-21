@@ -33,7 +33,7 @@ const ResourceForm = ({resource, onSubmit, alert}) => {
       { alert?.error &&
         <div className="alert alert-danger">{alert.error}</div>
       }
-      <form>
+      <form className="resource-form">
         <div className="mb-3">
           <label htmlFor="title">Title</label>
           <input

@@ -3,8 +3,10 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useGetResource } from '../actions';
+import { useSettings } from '../context/SettingsProvider';
 
 const ResourceDetail = () => {
+  const { settings } = useSettings();
   const { id } = useParams();
   const { resource, loading, error } = useGetResource(id);
 
@@ -17,7 +19,7 @@ const ResourceDetail = () => {
   }
 
   return (
-    <div className="card">
+    <div className={`card ${settings?.theme}`}>
       <div className="card-header">
         {resource.title}
       </div>
