@@ -6,11 +6,6 @@ import SettingsForm from './SettingsForm';
 const SettingsModal = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const saveSettings = (settings) => {
-    alert(JSON.stringify(settings));
-    setIsOpen(false);
-  }
-
   return (
     <>
       <button
@@ -20,7 +15,7 @@ const SettingsModal = () => {
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
       >
-        <SettingsForm onSubmit={saveSettings} />
+        <SettingsForm onSubmit={() => setIsOpen(false)} />
       </Modal>
     </>
   )
